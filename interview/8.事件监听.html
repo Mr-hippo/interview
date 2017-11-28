@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>事件监听</title>
+  </head>
+  <body>
+
+		<!-- W3C提供的两个函数：
+		【注】事件监听器，绑定事件。 IE8及以下版本不兼容。
+			addEventListener
+			【格式】事件对象.addEventListener(事件类型, 绑定的函数, 是否不冒泡);
+			第一个参数：事件类型 click
+			第三个参数：true 捕获   false 冒泡（默认）
+
+			removeEventListener
+			【格式】事件对象.removeEventListener(事件类型, 删除的函数);
+			【注】传统事件绑定的函数，没有办法进行删除。 -->
+
+
+    <button>添加事件</button>
+		<button>测试</button>
+		<button>删除事件</button>
+
+    <script type="text/javascript">
+      var btns = document.getElementsByTagName("button");
+      btns[0].onclick = function(){
+        btns[1].addEventListener("click", show, false);
+      }
+
+      btns[2].onclick = function(){
+        btns[1].removeEventListener("click", show)
+      }
+      function show(){
+        console.log("111");
+      }
+    </script>
+  </body>
+</html>

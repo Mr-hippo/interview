@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>拖拽</title>
+    <style>
+    #div1{
+      position: absolute;
+      left: 100px;
+      top: 100px;
+      width: 200px;
+      height: 200px;
+      background-color: red
+    }
+    </style>
+  </head>
+  <body>
+    <div id = "div1"></div>
+    <script type="text/javascript">
+      var oDiv = document.getElementById("div1");
+
+      drag(oDiv);
+      function drag(node){
+  			//1、添加鼠标按下事件
+  			var offsetX = 0; //记录相对位置
+  			var offsetY = 0;
+  			node.onmousedown = function(ev){
+  				var e = ev || window.event;
+  				offsetX = e.clientX - node.offsetLeft;
+  				offsetY = e.clientY - node.offsetTop;
+  				//2、添加移动
+  				document.onmousemove = function(ev){
+  					var e = ev || window.event;
+  					//改变拖拽物体的坐标
+  					node.style.left = e.clientX - offsetX + "px";
+  					node.style.top = e.clientY - offsetY + "px";
+
+  				}
+
+  				//3、取消拖拽
+  				document.onmouseup = function(){
+  					document.onmousemove = null;
+  				}
+  			}
+  		}
+    </script>
+  </body>
+</html>

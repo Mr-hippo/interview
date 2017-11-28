@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>事件委托</title>
+  </head>
+  <body>
+    <ul id = "ul1">
+			<li>1111111111111</li>
+			<li>2222222222222</li>
+			<li>3333333333333</li>
+			<li>4444444444444</li>
+			<li>5555555555555</li>
+			<li>6666666666666</li>
+		</ul>
+
+    <script type="text/javascript">
+    /*
+      事件委托的好处：
+      1、节省了资源。
+      2、后添加的控件同样可以共享。
+
+      事件委托实现：
+        1、将事件添加在当前控件的父级
+        2、判断一个当前响应事件的目标对象，是否符合标准。
+
+    */
+    var oUl = document.getElementById("ul1");
+    oUl.onclick = function(ev){
+      var e = ev || window.event;
+      var target = e.target || window.event.srcElement;
+      if(e.nodeName = "LI"){
+        target.style.backgroundColor = "red";
+      }
+    }
+
+    </script>
+  </body>
+</html>

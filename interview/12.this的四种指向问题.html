@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>this的指向</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+    //1、构造函数中的this
+      function Foo(){
+        this.name = "张先斌";
+        this.city = "青岛"
+        console.log(this);  //Foo {name: "张先斌", city: "青岛"}
+      }
+      var f1 = new Foo();
+      console.log(f1.name); //张先斌
+      console.log(f1.city); //青岛
+      //以上代码中，如果函数作为构造函数用，那么其中的this就代表它即将new出来的对象。
+
+      //2、函数作为对象的一个属性
+      var obj = {
+        x: 1,
+        fn: function(){
+          console.log(this);
+          console.log(this.x);
+        }
+      }
+      obj.fn();
+      //以上代码中，fn不仅作为一个对象的一个属性，而且的确是作为对象的一个属性被调用。结果this就是obj对象。
+      //注意，如果fn函数不作为obj的一个属性被调用，会是什么结果呢？
+      var obj = {
+        x: 1,
+        fn: function(){
+          console.log(this);
+          console.log(this.x);
+        }
+      }
+      var fn1 = obj.fn;
+      fn1();
+
+      //注：this指向window
+      var obj = {
+        x: 1,
+        fn: function(){
+          function fun(){
+            console.log(this);
+            console.log(this.x);
+          }
+          fun();
+        }
+      }
+      var fn1 = obj.fn;
+      fn1();
+
+      //3、函数用call或者apply调用
+      //当一个函数被call和apply调用时，this的值就取传入的对象的值。
+      var obj = {
+        x: 10
+      }
+      var fn = function(){
+        console.log(this);
+        console.log(this.x);
+      }
+      fn.call(obj);
+
+      //4、全局 & 调用普通函数
+      //在全局环境下，this永远是window，这个应该没有非议。
+      var x = 10;
+      var fn = function(){
+        console.log(this);
+        console.log(this.x);
+      }
+      fn();
+    </script>
+  </body>
+</html>

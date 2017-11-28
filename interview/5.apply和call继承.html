@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /*function animal(a, b){
+        this.type = 'animal'
+        this.behavior = function(){
+          console.log(this.type+' is running');
+        }
+      }
+      function cat(a, b){
+        this.name = 'wsscat'
+        //在这里call的意思就是把animal的方法应用到cat这个对象上
+        //所以cat就继承了animal的方法
+        animal.call(this);
+      }
+      console.log(new cat());*/
+
+
+      //实现多个继承
+      /*function animal(a, b){
+        this.type = 'animal'
+        this.behavior = function(){
+          console.log(this.type+' is running');
+        }
+      }
+
+      function wsscat(a,b){
+        this.age = 0
+      }
+      function cat(a, b){
+        this.name = 'wsscat'
+        //在这里call的意思就是把animal的方法应用到cat这个对象上
+        //所以cat就继承了animal的方法
+        animal.call(this);
+        wsscat.call(this);
+      }
+      console.log(new cat());*/
+
+      /*function animal(type){
+        this.type = type
+        this.behavior = function(){
+          console.log(this.type+' is running');
+        }
+      }
+      function cat(name, type){
+        this.name = name;
+        // animal.call(this);//type undefined
+        // animal.call(this,type);//type cute
+        // animal.call(this,arguments[1]);//type cute
+        // animal.call(this,arguments);//type ['wsscat','cute']
+        animal.apply(this,arguments)//type: wsscat
+      }
+      console.log(new cat("wsscat", "cute"));*/
+
+      function animal(type) {
+            this.type = type
+            this.behavior = function() {
+                console.log(this.type + " is running")
+            }
+        }
+        animal.prototype.action = function() {
+            console.log("running")
+        }
+
+        function cat(name, type) {
+            this.name = name
+            animal.call(this, type)
+        }
+
+        cat.prototype = new animal();
+        console.log(new cat('wsscat', 'cute'));
+        (new cat('wsscat')).action() //running
+    </script>
+  </body>
+</html>

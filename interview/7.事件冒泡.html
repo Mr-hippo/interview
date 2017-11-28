@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+		#div1{
+			background-color: red
+		}
+		#div2{
+			background-color: blue;
+		}
+		#div3{
+			background-color: yellow
+		}
+		div{
+			padding: 50px;
+		}
+		</style>
+		<script>
+		window.onload = function(){
+			var Divs = document.getElementsByTagName("div");
+			for(var i = 0; i < Divs.length; i++){
+				Divs[i].onclick = function(ev){
+					var e = ev || window.event;
+					alert(this.id)
+					stopBubble(e);
+				}
+			}
+		}
+
+		function stopBubble(e){
+			if(e.stopPropagation){
+				e.stopPropagation();
+			}else{
+				e.cancelBubble = true
+			}
+		}
+
+		/*
+			事件流产生：
+			1、叠加的结构
+			2、叠加的结构有同样的事件
+			3、当事件被触发的时候，所叠加的所有的控件都会触发这个事件。
+
+			事件流的类型：
+			事件冒泡
+				从最里面的控件开始触发，逐渐衍生到最外层的控件
+
+			事件捕获
+				从外向里进行触发。
+
+
+			阻止事件冒泡：
+
+
+		*/
+		</script>
+	</head>
+	<body>
+		<div id = "div1">
+			<div id = "div2">
+				<div id = "div3"></div>
+			</div>
+		</div>
+	</body>
+</html>
